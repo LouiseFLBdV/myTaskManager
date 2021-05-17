@@ -1,7 +1,6 @@
 package com.stefanini.taskmanager.dao;
 
 import java.util.List;
-import java.util.Optional;
 
 public interface Dao<T> {
 
@@ -10,5 +9,6 @@ public interface Dao<T> {
     T create(T entity);
     void update(T entity);
     void delete(T entity);
-
+    void commit();
+    void rollback();
 }
