@@ -1,0 +1,36 @@
+2021-06-09 15:44:09,113 INFO o.h.Version [main] HHH000412: Hibernate ORM core version 5.4.30.Final
+2021-06-09 15:44:09,763 INFO o.h.a.c.Version [main] HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+2021-06-09 15:44:10,383 WARN o.h.o.c.pooling [main] HHH10001002: Using Hibernate built-in connection pool (not for production use!)
+2021-06-09 15:44:10,384 INFO o.h.o.c.pooling [main] HHH10001005: using driver [null] at URL [jdbc:mysql://localhost:3306/temp]
+2021-06-09 15:44:10,384 INFO o.h.o.c.pooling [main] HHH10001001: Connection properties: {user=root, password=****, driver=com.mysql.cj.jdbc.Driver}
+2021-06-09 15:44:10,385 INFO o.h.o.c.pooling [main] HHH10001003: Autocommit mode: false
+2021-06-09 15:44:10,387 INFO o.h.e.j.c.i.DriverManagerConnectionProviderImpl [main] HHH000115: Hibernate connection pool size: 20 (min=1)
+2021-06-09 15:44:11,168 INFO o.h.d.Dialect [main] HHH000400: Using dialect: org.hibernate.dialect.MySQL5Dialect
+2021-06-09 15:44:12,443 INFO o.h.e.t.j.p.i.JtaPlatformInitiator [main] HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2021-06-09 15:44:12,651 INFO c.s.t.a.LoggingAspect [main] Try to getAll - done
+2021-06-09 15:44:12,920 INFO o.h.o.c.pooling [main] HHH10001008: Cleaning up connection pool [jdbc:mysql://localhost:3306/temp]
+2021-06-09 15:44:12,922 ERROR o.h.e.j.c.i.DriverManagerConnectionProviderImpl [main] Connection leak detected: there are 1 unclosed connections upon shutting down pool jdbc:mysql://localhost:3306/temp
+2021-06-09 17:05:51,251 INFO o.h.Version [main] HHH000412: Hibernate ORM core version 5.4.30.Final
+2021-06-09 17:05:51,691 INFO o.h.a.c.Version [main] HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+2021-06-09 17:05:52,160 WARN o.h.o.c.pooling [main] HHH10001002: Using Hibernate built-in connection pool (not for production use!)
+2021-06-09 17:05:52,160 INFO o.h.o.c.pooling [main] HHH10001005: using driver [null] at URL [jdbc:mysql://localhost:3306/temp]
+2021-06-09 17:05:52,160 INFO o.h.o.c.pooling [main] HHH10001001: Connection properties: {user=root, password=****, driver=com.mysql.cj.jdbc.Driver}
+2021-06-09 17:05:52,160 INFO o.h.o.c.pooling [main] HHH10001003: Autocommit mode: false
+2021-06-09 17:05:52,160 INFO o.h.e.j.c.i.DriverManagerConnectionProviderImpl [main] HHH000115: Hibernate connection pool size: 20 (min=1)
+2021-06-09 17:05:52,905 INFO o.h.d.Dialect [main] HHH000400: Using dialect: org.hibernate.dialect.MySQL5Dialect
+2021-06-09 17:05:53,699 INFO o.h.e.t.j.p.i.JtaPlatformInitiator [main] HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2021-06-09 17:05:53,801 INFO c.s.t.a.LoggingAspect [main] Try to getAll - done
+2021-06-09 17:05:53,993 INFO o.h.o.c.pooling [main] HHH10001008: Cleaning up connection pool [jdbc:mysql://localhost:3306/temp]
+2021-06-09 17:05:53,993 ERROR o.h.e.j.c.i.DriverManagerConnectionProviderImpl [main] Connection leak detected: there are 1 unclosed connections upon shutting down pool jdbc:mysql://localhost:3306/temp
+2021-06-09 17:14:26,558 INFO o.h.Version [main] HHH000412: Hibernate ORM core version 5.4.30.Final
+2021-06-09 17:14:27,006 INFO o.h.a.c.Version [main] HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+2021-06-09 17:14:27,458 WARN o.h.o.c.pooling [main] HHH10001002: Using Hibernate built-in connection pool (not for production use!)
+2021-06-09 17:14:27,458 INFO o.h.o.c.pooling [main] HHH10001005: using driver [null] at URL [jdbc:mysql://localhost:3306/temp]
+2021-06-09 17:14:27,458 INFO o.h.o.c.pooling [main] HHH10001001: Connection properties: {user=root, password=****, driver=com.mysql.cj.jdbc.Driver}
+2021-06-09 17:14:27,458 INFO o.h.o.c.pooling [main] HHH10001003: Autocommit mode: false
+2021-06-09 17:14:27,466 INFO o.h.e.j.c.i.DriverManagerConnectionProviderImpl [main] HHH000115: Hibernate connection pool size: 20 (min=1)
+2021-06-09 17:14:28,259 INFO o.h.d.Dialect [main] HHH000400: Using dialect: org.hibernate.dialect.MySQL5Dialect
+2021-06-09 17:14:29,052 INFO o.h.e.t.j.p.i.JtaPlatformInitiator [main] HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2021-06-09 17:14:29,144 INFO c.s.t.a.LoggingAspect [main] Try to getAll - done
+2021-06-09 17:14:29,344 INFO o.h.o.c.pooling [main] HHH10001008: Cleaning up connection pool [jdbc:mysql://localhost:3306/temp]
+2021-06-09 17:14:29,360 ERROR o.h.e.j.c.i.DriverManagerConnectionProviderImpl [main] Connection leak detected: there are 1 unclosed connections upon shutting down pool jdbc:mysql://localhost:3306/temp

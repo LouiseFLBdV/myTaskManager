@@ -1,3 +1,8 @@
 /.idea/
 /JavaInternship.iml
 /target/
+/application/taskmanager.iml
+/application/application.iml
+/dao-service-layer/dao-service.iml
+/dao-service-layer/dao-service-layer.iml
+/taskmanager-multi-modules.iml
