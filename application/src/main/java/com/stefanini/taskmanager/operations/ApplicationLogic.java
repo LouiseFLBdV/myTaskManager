@@ -1,37 +1,79 @@
 package com.stefanini.taskmanager.operations;
 
+
 import com.stefanini.taskmanager.operations.commands.*;
 
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 
-//todo commit
-//todo runnable de fi comenzile
-public class ApplicationLogic implements Runnable{
-    //todo модификаторы
-    String commandName;
-    List<AbstractCommand> abstractCommandList;
-    //todo altfel
-    public ApplicationLogic(String[] args){
-        commandName = args[0].toLowerCase();
-        args = Arrays.copyOfRange(args, 1, args.length);
-        abstractCommandList = new ArrayList<>();
-        abstractCommandList.add(new AddGroupTaskCommand(args));
-        abstractCommandList.add(new AddTaskCommand(args));
-        abstractCommandList.add(new CreateUserCommand(args));
-        abstractCommandList.add(new ShowAllUserCommand());
-        abstractCommandList.add(new ShowTaskCommand(args));
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+
+
+public class ApplicationLogic{
+    private String commandName;
+    private String[] commandArgs;
+    private static int tempCreateUser = 0;
+    private static int tempOperations = 0;
+    ExecutorService executorService = Executors.newFixedThreadPool(4);
+
+    public ApplicationLogic(){
     }
 
-    @Override
-    public void run() {
-        //todo aici argumente si de folosit cand trebue
-        for (AbstractCommand abstractCommand : abstractCommandList) {
+    public static int getTempCreateUser() {
+        return tempCreateUser;
+    }
 
-            if (abstractCommand.getCommandName().equals(commandName)) {
-                abstractCommand.execute();
-            }
+    public static void setTempCreateUser(int tempCreateUser) {
+        ApplicationLogic.tempCreateUser = tempCreateUser;
+    }
+
+    public static int getTempOperations() {
+        return tempOperations;
+    }
+
+    public static void setTempOperations(int tempOperations) {
+        ApplicationLogic.tempOperations = tempOperations;
+    }
+
+    public void execute(String[] args) {
+        commandName = args[0].toLowerCase();
+        commandArgs = Arrays.copyOfRange(args, 1, args.length);
+        switch (commandName){
+            case "addgrouptask":
+                tempOperations++;
+                executorService.execute(new AddGroupTaskCommand(commandArgs));
+                break;
+            case "addtask":
+                tempOperations++;
+                while (tempCreateUser>0){
+                    try {
+                        wait();
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                }
+                executorService.execute(new AddTaskCommand(commandArgs));
+
+                break;
+            case "createuser":
+                tempCreateUser++;
+                tempOperations++;
+                executorService.execute(new CreateUserCommand(commandArgs));
+
+            case "showallusers":
+                executorService.execute(new ShowAllUserCommand());
+                break;
+            case "showtasks":
+                while (tempOperations > 0 && tempCreateUser > 0){
+                    try {
+                        wait();
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                }
+                executorService.execute(new ShowTaskCommand(commandArgs));
+                break;
         }
+
     }
 }

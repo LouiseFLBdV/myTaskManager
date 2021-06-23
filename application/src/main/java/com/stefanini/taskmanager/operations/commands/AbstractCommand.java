@@ -7,7 +7,7 @@ import com.stefanini.taskmanager.service.impl.UserServiceImpl;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-public abstract class AbstractCommand {
+public abstract class AbstractCommand implements Runnable{
 
     private static final Logger logger = LogManager.getLogger();
     private String commandName;
@@ -22,7 +22,7 @@ public abstract class AbstractCommand {
     /**
      * This method is used to execute the command
      */
-    public abstract void execute();
+    public abstract void run();
     /**
      * This method is used to get command name
      */

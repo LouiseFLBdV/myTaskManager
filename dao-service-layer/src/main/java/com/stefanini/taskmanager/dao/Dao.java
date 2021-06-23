@@ -10,12 +10,6 @@ public interface Dao<T> {
      */
     List<T> getAll();
     /**
-     * This method is used to get entity by id
-     * @param id of type long
-     * @return entity
-     */
-    T get(long id);
-    /**
      * This method is used to add entity
      * @param entity
      * @return entity

@@ -1,5 +1,6 @@
 package com.stefanini.taskmanager.operations.commands;
 
+import com.stefanini.taskmanager.entities.Task;
 import com.stefanini.taskmanager.entities.User;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -13,15 +14,16 @@ public class ShowAllUserCommand extends AbstractCommand {
     }
 
     @Override
-    public void execute() {
+    public void run() {
         List<User> users = getUserService().getAll();
-        users.forEach(user -> {
-                    getLogger().info("User: " + user.getUserName());
-                    user.getTasks().forEach(task -> {
-                        getLogger().info("\ttask " + task.getTaskTitle() + ":");
-                        getLogger().info("\t\t" + task.getDescription());
-                    });
+        for (User user:users){
+            getLogger().info("User: " + user.getUserName());
+            if (user.getTasks()!=null){
+                for (Task task: user.getTasks()){
+                    getLogger().info("\ttask " + task.getTaskTitle() + ":");
+                    getLogger().info("\t\t" + task.getDescription());
                 }
-        );
+            }
+        }
     }
 }

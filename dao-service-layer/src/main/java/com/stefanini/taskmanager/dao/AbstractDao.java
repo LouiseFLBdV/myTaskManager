@@ -19,44 +19,23 @@ public abstract class AbstractDao<T> implements Dao<T>{
         session = HibernateUtil.getSessionFactory().openSession();
     }
 
-    //todo re
     @Override
     public List<T> getAll() {
         return getByCriteria(null, null);
     }
 
-    @Override
-    public T get(long id) {
-        checkTransaction();
-        try{
-            T entity = session.get(getEntityClass(), id);
-            session.getTransaction().commit();
-            return entity;
-        } catch (Exception e){
-//            logger.error("get entity by id  - error");
-            return null;
-        }
-    }
-
-
     public List<T> getByCriteria(String criteriaField, String criteriaValue){
-        checkTransaction();
-        try{
-            //todo
-            CriteriaBuilder criteriaBuilder = session.getCriteriaBuilder();
-            CriteriaQuery<T> criteriaQuery = criteriaBuilder.createQuery(getEntityClass());
-            Root<T> root = criteriaQuery.from(getEntityClass());
-            criteriaQuery.select(root);
-            if (criteriaField!=null){
-                criteriaQuery.where(criteriaBuilder.equal(root.get(criteriaField), criteriaValue));
-            }
-            List<T> resultList = session.createQuery(criteriaQuery).getResultList();
 
-            return resultList;
-        } catch (Exception e){
-//            logger.error("get entity by Criteria  - error");
+        CriteriaBuilder criteriaBuilder = session.getCriteriaBuilder();
+        CriteriaQuery<T> criteriaQuery = criteriaBuilder.createQuery(getEntityClass());
+        Root<T> root = criteriaQuery.from(getEntityClass());
+        criteriaQuery.select(root);
+        if (criteriaField!=null){
+            criteriaQuery.where(criteriaBuilder.equal(root.get(criteriaField), criteriaValue));
         }
-        return null;
+        List<T> resultList = session.createQuery(criteriaQuery).getResultList();
+
+        return resultList;
     }
 
     @Override
@@ -68,7 +47,6 @@ public abstract class AbstractDao<T> implements Dao<T>{
             return entity;
         } catch (Exception e){
 //            logger.error("entity save - error");
-            session.getTransaction().rollback();
             return null;
         }
     }
@@ -93,14 +71,12 @@ public abstract class AbstractDao<T> implements Dao<T>{
             session.getTransaction().commit();
         } catch (Exception e){
 //            logger.error("entity delete - error");
-            session.getTransaction().rollback();
         }
     }
 
     public void checkTransaction() {
         if (!session.getTransaction().isActive()) {
             session.getTransaction().begin();
-//            logger.info("session begin - done");
         }
     }
 }

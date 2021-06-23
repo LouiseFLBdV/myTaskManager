@@ -1,6 +1,7 @@
 package com.stefanini.taskmanager.operations.commands;
 import com.stefanini.taskmanager.entities.Task;
 import com.stefanini.taskmanager.entities.User;
+import com.stefanini.taskmanager.operations.ApplicationLogic;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,7 +14,7 @@ public class AddGroupTaskCommand extends AbstractCommand {
     }
 
     @Override
-    public void execute() {
+    public void run() {
 
         List<User> users = new ArrayList<>();
         for (int i = 3; i < getArgs().length; i++){
@@ -28,5 +29,9 @@ public class AddGroupTaskCommand extends AbstractCommand {
         }
 
         getTaskService().create(new Task(users, getArgs()[0], getArgs()[1]));
+        ApplicationLogic.setTempOperations(ApplicationLogic.getTempOperations() - 1);
+        if (ApplicationLogic.getTempOperations() == 0){
+            notify();
+        }
     }
 }

@@ -35,11 +35,6 @@ public class TaskServiceImpl implements TaskService {
     }
 
     @Override
-    public Task get(long id) {
-        return taskDao.get(id);
-    }
-
-    @Override
     public Task create(Task entity) {
         taskDao.create(entity);
         EmailService.sendEmail(entity);

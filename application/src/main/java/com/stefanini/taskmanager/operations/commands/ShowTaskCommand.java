@@ -1,6 +1,7 @@
 package com.stefanini.taskmanager.operations.commands;
 
 import com.stefanini.taskmanager.entities.User;
+import com.stefanini.taskmanager.operations.ApplicationLogic;
 
 public class ShowTaskCommand extends AbstractCommand {
 
@@ -10,7 +11,8 @@ public class ShowTaskCommand extends AbstractCommand {
     }
 
     @Override
-    public void execute() {
+    public void run() {
+
         User user = getUserService().getByUserName(getArgs()[0]);
         if (user!=null){
             getLogger().info("User: " + user.getUserName());

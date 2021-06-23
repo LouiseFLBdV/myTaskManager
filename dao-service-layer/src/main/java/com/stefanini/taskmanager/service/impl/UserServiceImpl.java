@@ -15,7 +15,7 @@ public class UserServiceImpl implements UserService {
     private UserDao userDao;
     private static UserServiceImpl instance;
 
-    public static synchronized UserServiceImpl getInstance(){
+    public static UserServiceImpl getInstance(){
         if (instance == null){
             instance = new UserServiceImpl();
         }
@@ -31,11 +31,6 @@ public class UserServiceImpl implements UserService {
     @Override
     public List<User> getAll() {
         return userDao.getAll();
-    }
-
-    @Override
-    public User get(long id) {
-        return userDao.get(id);
     }
 
     @Override
