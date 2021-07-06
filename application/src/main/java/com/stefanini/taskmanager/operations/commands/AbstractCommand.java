@@ -1,5 +1,6 @@
 package com.stefanini.taskmanager.operations.commands;
 
+import com.stefanini.taskmanager.dto.InputArgs;
 import com.stefanini.taskmanager.service.TaskService;
 import com.stefanini.taskmanager.service.UserService;
 import com.stefanini.taskmanager.service.impl.TaskServiceImpl;
@@ -10,8 +11,7 @@ import org.apache.logging.log4j.Logger;
 public abstract class AbstractCommand implements Runnable{
 
     private static final Logger logger = LogManager.getLogger();
-    private String commandName;
-    private String[] args;
+    private InputArgs inputArgs;
     private final TaskService taskService;
     private final UserService userService;
 
@@ -23,30 +23,15 @@ public abstract class AbstractCommand implements Runnable{
      * This method is used to execute the command
      */
     public abstract void run();
-    /**
-     * This method is used to get command name
-     */
-    public String getCommandName(){
-        return commandName;
+
+    public InputArgs getInputArgs() {
+        return inputArgs;
     }
-    /**
-     * This method is used to set command name
-     */
-    public void setCommandName(String commandName) {
-        this.commandName = commandName;
+
+    public void setInputArgs(InputArgs inputArgs) {
+        this.inputArgs = inputArgs;
     }
-    /**
-     * This method is used to get parameters
-     */
-    public String[] getArgs() {
-        return args;
-    }
-    /**
-     * This method is used to set parameters
-     */
-    public void setArgs(String[] args) {
-        this.args = args;
-    }
+
     /**
      * This method is used to get task service
      */

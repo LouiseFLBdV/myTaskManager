@@ -1,16 +1,14 @@
 package com.stefanini.taskmanager.operations.commands;
 
+import com.stefanini.taskmanager.dto.InputArgs;
 import com.stefanini.taskmanager.entities.Task;
 import com.stefanini.taskmanager.entities.User;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import java.util.List;
 
 public class ShowAllUserCommand extends AbstractCommand {
 
-    public ShowAllUserCommand(){
-        setCommandName("showallusers");
+    public ShowAllUserCommand(InputArgs inputArgs){
+        setInputArgs(inputArgs);
     }
 
     @Override
@@ -25,5 +23,13 @@ public class ShowAllUserCommand extends AbstractCommand {
                 }
             }
         }
+
+//        System.out.println("Show ALL user start");
+//        try {
+//            Thread.sleep(10000);
+//        } catch (InterruptedException e) {
+//            e.printStackTrace();
+//        }
+//        System.out.println("Show all user finish");
     }
 }

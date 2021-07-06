@@ -19,14 +19,16 @@ public class Application {
 //        }
 
         ApplicationLogic applicationLogic = new ApplicationLogic();
+//        args = new String[]{"showTasks", "uN3"};
         args = new String[]{"showAllUsers"};
         applicationLogic.execute(args);
-        args = new String[]{"createUser", "firstName5" ,"lastName3", "qwert1sds23"};
+
+        args = new String[]{"createUser", "fn=firstName1" ,"ln=lastName1", "un=userName1"};
         applicationLogic.execute(args);
-        args = new String[]{"addTask", "qwert1sds23", "task4", "task3 task3 task3 task3 task3"};
+        args = new String[]{"addTask", "un=userName1", "tt=task1", "td=task1desc"};
         applicationLogic.execute(args);
-//        args = new String[]{"showAllUsers"};
-//        applicationLogic.execute(args);
+        args = new String[]{"showAllUsers"};
+        applicationLogic.execute(args);
 
 //        HibernateUtil.shutdown();
     }

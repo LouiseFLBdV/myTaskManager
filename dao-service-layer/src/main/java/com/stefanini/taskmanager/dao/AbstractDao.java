@@ -34,7 +34,6 @@ public abstract class AbstractDao<T> implements Dao<T>{
             criteriaQuery.where(criteriaBuilder.equal(root.get(criteriaField), criteriaValue));
         }
         List<T> resultList = session.createQuery(criteriaQuery).getResultList();
-
         return resultList;
     }
 

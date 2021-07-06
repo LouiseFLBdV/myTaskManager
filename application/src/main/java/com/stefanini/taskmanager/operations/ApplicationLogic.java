@@ -1,79 +1,50 @@
 package com.stefanini.taskmanager.operations;
 
 
+import com.stefanini.taskmanager.dto.InputArgs;
 import com.stefanini.taskmanager.operations.commands.*;
+import com.stefanini.taskmanager.service.InputService;
 
-import java.util.Arrays;
+import java.util.*;
 
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-
+import java.util.concurrent.*;
 
 public class ApplicationLogic{
-    private String commandName;
-    private String[] commandArgs;
-    private static int tempCreateUser = 0;
-    private static int tempOperations = 0;
-    ExecutorService executorService = Executors.newFixedThreadPool(4);
-
+    private static final HashMap<InputArgs,CompletableFuture> completableFutureMap = new HashMap<>();
+    private final List<CompletableFuture> waitToCompleteList = new ArrayList<>();
+    private final ExecutorService executorService = Executors.newFixedThreadPool(4);
     public ApplicationLogic(){
     }
 
-    public static int getTempCreateUser() {
-        return tempCreateUser;
-    }
-
-    public static void setTempCreateUser(int tempCreateUser) {
-        ApplicationLogic.tempCreateUser = tempCreateUser;
-    }
-
-    public static int getTempOperations() {
-        return tempOperations;
-    }
-
-    public static void setTempOperations(int tempOperations) {
-        ApplicationLogic.tempOperations = tempOperations;
-    }
-
     public void execute(String[] args) {
-        commandName = args[0].toLowerCase();
-        commandArgs = Arrays.copyOfRange(args, 1, args.length);
-        switch (commandName){
+
+        InputArgs inputArgs = InputService.getInputArgs(args);
+        switch (inputArgs.getCommandName()){
             case "addgrouptask":
-                tempOperations++;
-                executorService.execute(new AddGroupTaskCommand(commandArgs));
+                completableFutureMap.put(inputArgs, CompletableFuture.runAsync(new AddGroupTaskCommand(inputArgs), executorService));
                 break;
             case "addtask":
-                tempOperations++;
-                while (tempCreateUser>0){
-                    try {
-                        wait();
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
+                completableFutureMap.keySet().forEach(key ->{
+                    if (key.getCommandName().equals("createuser")){
+                        if (key.getUserName().get(0).equals(inputArgs.getUserName().get(0))){
+                            waitToCompleteList.add(completableFutureMap.get(key));
+                        }
                     }
-                }
-                executorService.execute(new AddTaskCommand(commandArgs));
-
+                });
+                //не может принять колекцию
+                completableFutureMap.put(inputArgs, CompletableFuture.allOf(waitToCompleteList.toArray(new CompletableFuture[waitToCompleteList.size()])).thenRunAsync(new AddTaskCommand(inputArgs), executorService));
                 break;
             case "createuser":
-                tempCreateUser++;
-                tempOperations++;
-                executorService.execute(new CreateUserCommand(commandArgs));
-
+                completableFutureMap.put(inputArgs, CompletableFuture.runAsync(new CreateUserCommand(inputArgs), executorService));
+                break;
             case "showallusers":
-                executorService.execute(new ShowAllUserCommand());
+//                CompletableFuture.allOf(stream.completableFutureMap);
+                completableFutureMap.put(inputArgs, CompletableFuture.runAsync(new ShowAllUserCommand(inputArgs), executorService));
                 break;
             case "showtasks":
-                while (tempOperations > 0 && tempCreateUser > 0){
-                    try {
-                        wait();
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
-                }
-                executorService.execute(new ShowTaskCommand(commandArgs));
+                List<CompletableFuture> waitToCompleteList = new ArrayList<>();
+                completableFutureMap.put(inputArgs, CompletableFuture.runAsync(new ShowTaskCommand(inputArgs), executorService));
                 break;
         }
-
     }
 }
