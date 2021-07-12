@@ -14,7 +14,7 @@ public class InputService {
             }else if(arg.substring(0, 3).equals("un=")){
                 inputArgs.setUserName(arg.substring(3));
 
-            }else if(arg.substring(0,3).equals("tt="))git {
+            }else if(arg.substring(0,3).equals("tt=")) {
                 inputArgs.setTaskTittle(arg.substring(3));
 
             }else if (arg.substring(0,3).equals("td=")){
