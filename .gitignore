@@ -6,3 +6,8 @@
 /dao-service-layer/dao-service.iml
 /dao-service-layer/dao-service-layer.iml
 /taskmanager-multi-modules.iml
+/
+/application/target/
+/logs/
+/dao-service-layer/target/
+/dao-service-layer/src/com/stefanini/taskmanager/com.iml

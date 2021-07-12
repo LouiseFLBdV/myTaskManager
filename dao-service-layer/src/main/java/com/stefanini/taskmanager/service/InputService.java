@@ -10,17 +10,17 @@ public class InputService {
         inputArgs.setCommandName(args[0].toLowerCase());
         for (String arg: Arrays.copyOfRange(args, 1, args.length)){
             if(arg.substring(0, 3).equals("ln=")){
-                inputArgs.setLastName(arg.substring(4));
+                inputArgs.setLastName(arg.substring(3));
             }else if(arg.substring(0, 3).equals("un=")){
-                inputArgs.setUserName(arg.substring(4));
+                inputArgs.setUserName(arg.substring(3));
 
-            }else if(arg.substring(0,3).equals("tt=")){
-                inputArgs.setTaskTittle(arg.substring(4));
+            }else if(arg.substring(0,3).equals("tt="))git {
+                inputArgs.setTaskTittle(arg.substring(3));
 
             }else if (arg.substring(0,3).equals("td=")){
-                inputArgs.setDesc(arg.substring(4));
+                inputArgs.setDesc(arg.substring(3));
             }else if (arg.substring(0,3).equals("fn=")){
-                inputArgs.setFirstName(arg.substring(4));
+                inputArgs.setFirstName(arg.substring(3));
             }
         }
         return inputArgs;
