@@ -3,9 +3,12 @@ package com.stefanini.taskmanager.operations.commands;
 import com.stefanini.taskmanager.entities.Task;
 import com.stefanini.taskmanager.entities.User;
 import com.stefanini.taskmanager.model.InputModel;
+import com.stefanini.taskmanager.model.OutputModel;
 import com.stefanini.taskmanager.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+
+import java.util.List;
 
 @Component
 public class ShowUsersCommand extends AbstractCommand {
@@ -17,8 +20,12 @@ public class ShowUsersCommand extends AbstractCommand {
     UserService userService;
 
     @Override
-    public void execute() {
-        userService.getAll().forEach(this::showUsers);
+    public OutputModel execute() {
+        OutputModel outputModel = new OutputModel();
+        List<User> users = userService.getAll();
+        users.forEach(this::showUsers);
+        outputModel.setUsers(users);
+        return outputModel;
     }
 
     public void showUsers(User user){

@@ -4,6 +4,7 @@ package com.stefanini.taskmanager.operations.commands;
 import com.stefanini.taskmanager.entities.Task;
 import com.stefanini.taskmanager.entities.User;
 import com.stefanini.taskmanager.model.InputModel;
+import com.stefanini.taskmanager.model.OutputModel;
 import com.stefanini.taskmanager.service.TaskService;
 import com.stefanini.taskmanager.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,12 +21,16 @@ public class ShowUserTaskCommand extends AbstractCommand {
     }
 
     @Override
-    public void execute() {
-        if (userService.getByUserName(getInputModel().getUserName())!=null){
+    public OutputModel execute() {
+        OutputModel outputModel = new OutputModel();
+        User user = userService.getByUserName(getInputModel().getUserName());
+        outputModel.setUser(user);
+        if (user!=null){
             showUser(userService.getByUserName(getInputModel().getUserName()));
         }else {
             getLogger().info("User " + getInputModel().getUserName() + " not found");
         }
+        return outputModel;
     }
 
     public void showUser(User user){

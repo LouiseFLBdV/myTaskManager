@@ -14,7 +14,7 @@
     </div>
     <div class="row w-100">
         <div class="col-3" style="margin-top: 20px;">
-            <form:form action="applicationLogic" modelAttribute="inputModel">
+            <form:form action="appLogicController" modelAttribute="inputModel">
                 <div class="row" style="margin-left: 10px">
                     <h5 class="col-4">userName</h5>
                     <div class="col-8"><form:input path="userName" /></div><br><br>

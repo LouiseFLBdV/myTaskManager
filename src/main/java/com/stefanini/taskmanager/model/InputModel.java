@@ -4,12 +4,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class InputModel {
-    String commandName;
-    String userName;
-    String lastName;
-    String firstName;
-    String taskTittle;
-    String desc;
+    private String commandName;
+    private String userName;
+    private String lastName;
+    private String firstName;
+    private String taskTittle;
+    private String desc;
 
     public String getCommandName() {
         return commandName;
