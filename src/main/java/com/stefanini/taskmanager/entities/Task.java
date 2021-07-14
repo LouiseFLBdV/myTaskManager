@@ -2,6 +2,7 @@ package com.stefanini.taskmanager.entities;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -29,12 +30,13 @@ public class Task implements Serializable {
             , joinColumns = @JoinColumn(name = "task_id")
             , inverseJoinColumns = @JoinColumn(name = "user_id")
     )
-    private List<User> users;
+    private List<User> users = new ArrayList<>();
 
 
-    public Task(String taskTitle, String description) {
+    public Task(User user, String taskTitle, String description) {
         this.taskTitle = taskTitle;
         this.description = description;
+        users.add(user);
     }
 
     public Task(List<User> users, String taskTitle, String description) {

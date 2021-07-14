@@ -2,20 +2,23 @@ package com.stefanini.taskmanager.operations.commands;
 
 import com.stefanini.taskmanager.entities.User;
 import com.stefanini.taskmanager.model.InputModel;
+import com.stefanini.taskmanager.service.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
+@Component
 public class CreateUserCommand extends AbstractCommand {
-
-    public CreateUserCommand(InputModel inputModel){
-        setInputModel(inputModel);
+    @Autowired
+    UserService userService;
+    @Override
+    public void run() {
+        if(userService.getByUserName(getInputModel().getUserName())==null){
+            userService.create(new User(getInputModel().getFirstName(), getInputModel().getLastName(), getInputModel().getUserName()));
+        }
     }
 
     @Override
-    public void run() {
-        System.out.println(getInputModel());
-        if(getUserService().getByUserName(getInputModel().getUserName().get(0))==null){
-            getUserService().create(new User(getInputModel().getFirstName(), getInputModel().getLastName(), getInputModel().getUserName().get(0)));
-        }else{
-            getLogger().warn("User " + getInputModel().getUserName().get(0) + " already exist");
-        }
+    public void setInputModel(InputModel inputModel) {
+        super.setInputModel(inputModel);
     }
 }

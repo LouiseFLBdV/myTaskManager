@@ -5,7 +5,7 @@ import java.util.List;
 
 public class InputModel {
     String commandName;
-    List<String> userName = new ArrayList<>();
+    String userName;
     String lastName;
     String firstName;
     String taskTittle;
@@ -19,20 +19,16 @@ public class InputModel {
         this.commandName = commandName;
     }
 
-    public List<String> getUserName() {
+    public String getUserName() {
         return userName;
     }
 
     public void setUserName(String userName) {
-        this.userName.add(userName);
+        this.userName = userName;
     }
 
     public String getLastName() {
         return lastName;
-    }
-
-    public void setUserName(List<String> userName) {
-        this.userName = userName;
     }
 
     public String getFirstName() {

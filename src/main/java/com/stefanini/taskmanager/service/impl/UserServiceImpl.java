@@ -13,7 +13,6 @@ import java.util.List;
 public class UserServiceImpl implements UserService{
     private UserDao userDao;
     public UserServiceImpl(){
-        System.out.println("user service created");
     }
     @Autowired
     public void setTaskDao(UserDao userDao) {
@@ -30,7 +29,6 @@ public class UserServiceImpl implements UserService{
     @Override
     @Transactional
     public User create(User entity) {
-        System.out.println("try create");
         userDao.create(entity);
         return entity;
     }

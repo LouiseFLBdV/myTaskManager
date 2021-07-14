@@ -34,10 +34,10 @@
                     <h5 class="col-4">Command</h5>
                     <div class="col-8">
                         <form:select path="commandName">
-                            <form:option value="showallusers" label="Show all users"/>
-                            <form:option value="showtasks" label="Show user task"/>
                             <form:option value="createuser" label="Create user"/>
                             <form:option value="addtask" label="Add task to user"/>
+                            <form:option value="showusers" label="Show users"/>
+                            <form:option value="showusertask" label="Show user task"/>
                         </form:select>
                     </div><br><br>
                     <div class="col-12"><button type="submit" class="btn btn-dark">Submit</button></div>

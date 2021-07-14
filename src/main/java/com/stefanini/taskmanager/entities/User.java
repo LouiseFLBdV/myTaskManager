@@ -1,6 +1,7 @@
 package com.stefanini.taskmanager.entities;
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -29,7 +30,7 @@ public class User implements Serializable {
             , joinColumns = @JoinColumn(name = "user_id")
             , inverseJoinColumns = @JoinColumn(name = "task_id")
     )
-    private List<Task> tasks;
+    private List<Task> tasks = new ArrayList<>();
 
     public User() { }
 
