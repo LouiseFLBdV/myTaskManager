@@ -11,7 +11,7 @@ public class CreateUserCommand extends AbstractCommand {
     @Autowired
     UserService userService;
     @Override
-    public void run() {
+    public void execute() {
         if(userService.getByUserName(getInputModel().getUserName())==null){
             userService.create(new User(getInputModel().getFirstName(), getInputModel().getLastName(), getInputModel().getUserName()));
         }

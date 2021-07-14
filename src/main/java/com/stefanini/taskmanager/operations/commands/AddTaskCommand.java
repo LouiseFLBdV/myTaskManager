@@ -21,7 +21,7 @@ public class AddTaskCommand extends AbstractCommand {
     }
 
     @Override
-    public void run() {
+    public void execute() {
         taskService.create(new Task(userService.getByUserName(getInputModel().getUserName()), getInputModel().getTaskTittle(), getInputModel().getDesc()));
     }
 

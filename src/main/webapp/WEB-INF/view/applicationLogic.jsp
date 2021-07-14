@@ -11,18 +11,7 @@
             <h2 style="color: white">TaskManager</h2>
         </div>
         <div class="col-12">
-            <c:if test="${inputModel.commandName=='showallusers'}">
-                <h2>Show All users</h2>
-            </c:if>
-            <c:if test="${inputModel.commandName=='showtasks'}">
-                <h2>Show user task</h2>
-            </c:if>
-            <c:if test="${inputModel.commandName=='createuser'}">
-                <h2>Create User</h2>
-            </c:if>
-            <c:if test="${inputModel.commandName=='addtask'}">
-                <h2>Add task</h2>
-            </c:if>
+            applogic
         </div>
     </div>
 </main>

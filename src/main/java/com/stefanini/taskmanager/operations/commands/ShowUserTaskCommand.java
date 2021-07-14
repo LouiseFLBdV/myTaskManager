@@ -20,7 +20,7 @@ public class ShowUserTaskCommand extends AbstractCommand {
     }
 
     @Override
-    public void run() {
+    public void execute() {
         if (userService.getByUserName(getInputModel().getUserName())!=null){
             showUser(userService.getByUserName(getInputModel().getUserName()));
         }else {

@@ -17,7 +17,7 @@ public class ShowUsersCommand extends AbstractCommand {
     UserService userService;
 
     @Override
-    public void run() {
+    public void execute() {
         userService.getAll().forEach(this::showUsers);
     }
 
