@@ -77,6 +77,7 @@ public class TaskServiceImpl implements TaskService {
         }
         taskEntity.setTaskTitle(task.getTaskTitle());
         taskEntity.setDescription(task.getDescription());
+        System.out.println("userId:" + task.getUsers().get(0));
         taskEntity.setUsers(task.getUsers().stream().map(user -> userDao.getById(user.getUserId())).collect(Collectors.toList()));
         return taskEntity;
     }

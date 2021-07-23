@@ -6,7 +6,7 @@
 </head>
 <body>
 <table>
-    <c:if test="${outputModel.commandName == 'createuser'}">
+    <c:if test="${out.commandName == 'createuser'}">
         <h2>Create User</h2>
         <h4>${outputModel.user.userName} created</h4>
     </c:if>

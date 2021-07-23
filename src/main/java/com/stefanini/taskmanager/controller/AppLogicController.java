@@ -1,55 +1,35 @@
 package com.stefanini.taskmanager.controller;
 
 import com.stefanini.taskmanager.model.InputModel;
-import com.stefanini.taskmanager.model.OutputModel;
-import com.stefanini.taskmanager.operations.commands.AddTaskCommand;
-import com.stefanini.taskmanager.operations.commands.CreateUserCommand;
-import com.stefanini.taskmanager.operations.commands.ShowUserTaskCommand;
-import com.stefanini.taskmanager.operations.commands.ShowUsersCommand;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import org.springframework.web.servlet.view.RedirectView;
 
-
-//todo service command
-//todo url
+//service
 @Controller
 public class AppLogicController {
-    @Autowired
-    CreateUserCommand createUserCommand;
-    @Autowired
-    ShowUsersCommand showUsersCommand;
-    @Autowired
-    AddTaskCommand addTaskCommand;
-    @Autowired
-    ShowUserTaskCommand showUserTaskCommand;
 
     @RequestMapping("/appLogicController")
-    public String applicationLogic(@ModelAttribute("inputModel") InputModel inputModel, Model model){
-        OutputModel outputModel = new OutputModel();
+    public RedirectView applicationLogic(@ModelAttribute("inputModel") InputModel inputModel, RedirectAttributes redirectAttributes){
+        RedirectView redirectView = new RedirectView("/applicationLogic",true);
+        redirectAttributes.addFlashAttribute("inputModel", inputModel);
         switch (inputModel.getCommandName()){
             case "createuser":
-                createUserCommand.setInputModel(inputModel);
-                outputModel = createUserCommand.execute();
+                redirectView = new RedirectView("/createUser",true);
                 break;
             case "addtask":
-                addTaskCommand.setInputModel(inputModel);
-                outputModel = addTaskCommand.execute();
+                redirectView = new RedirectView("/addTask",true);
                 break;
             case "showusers":
-                showUsersCommand.setInputModel(inputModel);
-                outputModel = showUsersCommand.execute();
+                redirectView = new RedirectView("/showUsers",true);
                 break;
             case "showusertask":
-                showUserTaskCommand.setInputModel(inputModel);
-                outputModel = showUserTaskCommand.execute();
+                redirectView = new RedirectView("/showUserTask",true);
                 break;
         }
-        outputModel.setCommandName(inputModel.getCommandName());
-        model.addAttribute("outputModel", outputModel);
-        return "appLogicController";
+        return redirectView;
     }
 }
