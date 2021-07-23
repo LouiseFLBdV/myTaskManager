@@ -1,6 +1,8 @@
 package com.stefanini.taskmanager.operations.commands;
 
 
+import com.stefanini.taskmanager.dto.TaskDTO;
+import com.stefanini.taskmanager.dto.UserDTO;
 import com.stefanini.taskmanager.entities.Task;
 import com.stefanini.taskmanager.entities.User;
 import com.stefanini.taskmanager.model.InputModel;
@@ -23,7 +25,7 @@ public class ShowUserTaskCommand extends AbstractCommand {
     @Override
     public OutputModel execute() {
         OutputModel outputModel = new OutputModel();
-        User user = userService.getByUserName(getInputModel().getUserName());
+        UserDTO user = userService.getByUserName(getInputModel().getUserName());
         outputModel.setUser(user);
         if (user!=null){
             showUser(userService.getByUserName(getInputModel().getUserName()));
@@ -33,18 +35,16 @@ public class ShowUserTaskCommand extends AbstractCommand {
         return outputModel;
     }
 
-    public void showUser(User user){
+    public void showUser(UserDTO user){
         getLogger().info("User: " + user.getUserName());
         if (!user.getTasks().isEmpty()){
             user.getTasks().forEach(this::showTasks);
         }
     }
 
-    public void showTasks(Task task){
+    public void showTasks(TaskDTO task){
         getLogger().info("\ttask " + task.getTaskTitle() + ":");
         getLogger().info("\t\t" + task.getDescription());
-        System.out.println("\ttask " + task.getTaskTitle() + ":");
-        System.out.println("\t\t" + task.getDescription());
     }
 
     @Override

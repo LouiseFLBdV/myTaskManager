@@ -1,55 +1,90 @@
 package com.stefanini.taskmanager.service.impl;
 
+import com.stefanini.taskmanager.dao.TaskDao;
 import com.stefanini.taskmanager.dao.UserDao;
+import com.stefanini.taskmanager.dto.TaskDTO;
+import com.stefanini.taskmanager.dto.UserDTO;
 import com.stefanini.taskmanager.entities.User;
 import com.stefanini.taskmanager.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
+
 
 @Service
 public class UserServiceImpl implements UserService{
+
     private UserDao userDao;
-    public UserServiceImpl(){
-    }
+    private TaskDao taskDao;
+
+    public UserServiceImpl(){ }
+
     @Autowired
-    public void setTaskDao(UserDao userDao) {
+    public void setUserDao(UserDao userDao) {
         this.userDao = userDao;
     }
 
-
-    @Override
-    @Transactional
-    public List<User> getAll() {
-        return userDao.getAll();
+    @Autowired
+    public void setTaskDao(TaskDao taskDao) {
+        this.taskDao = taskDao;
     }
 
     @Override
     @Transactional
-    public User create(User entity) {
-        userDao.create(entity);
-        return entity;
+    public UserDTO getById(long id) {
+        return UserDTO.convertToDTO(userDao.getById(id));
     }
 
     @Override
     @Transactional
-    public User update(User entity) {
-        userDao.update(entity);
-        return entity;
+    public List<UserDTO> getAll() {
+        List<User> users = userDao.getAll();
+        List<UserDTO> usersDTO = new ArrayList<>();
+        users.forEach(user -> {
+            usersDTO.add(UserDTO.convertToDTO(user));
+        });
+        return usersDTO;
     }
 
     @Override
     @Transactional
-    public void remove(User entity) {
-        userDao.delete(entity);
+    public UserDTO create(UserDTO user) {
+        return UserDTO.convertToDTO(userDao.create(convertToDAO(user)));
     }
 
     @Override
     @Transactional
-    public User getByUserName(String userName) {
-        return userDao.getByUserName(userName);
+    public void update(UserDTO user) {
+        userDao.update(convertToDAO(user));
     }
 
+    @Override
+    @Transactional
+    public void remove(UserDTO user) {
+        userDao.delete(convertToDAO(user));
+    }
+
+    @Override
+    @Transactional
+    public UserDTO getByUserName(String userName) {
+        return UserDTO.convertToDTO(userDao.getByUserName(userName));
+    }
+
+    public User convertToDAO(UserDTO user){
+        User userEntity;
+        if (user.getUserId()==0){
+            userEntity = new User();
+        }else{
+            userEntity = userDao.getById(user.getUserId());
+        }
+        userEntity.setUserName(user.getUserName());
+        userEntity.setFirstName(user.getFirstName());
+        userEntity.setLastName(user.getLastName());
+        userEntity.setTasks(user.getTasks().stream().map(task-> taskDao.getById(task.getTaskId())).collect(Collectors.toList()));
+        return userEntity;
+    }
 }

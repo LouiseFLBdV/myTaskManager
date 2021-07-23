@@ -8,12 +8,10 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 public abstract class AbstractCommand{
-
     private static final Logger logger = LogManager.getLogger();
     private InputModel inputModel;
 
-    AbstractCommand(){
-    }
+    AbstractCommand(){}
     public abstract OutputModel execute();
 
     public InputModel getInputModel() {

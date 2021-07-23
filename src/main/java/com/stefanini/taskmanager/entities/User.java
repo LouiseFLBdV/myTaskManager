@@ -32,18 +32,29 @@ public class User implements Serializable {
     )
     private List<Task> tasks = new ArrayList<>();
 
-    public User() { }
-
+    public User() {}
     public User(String firstName, String lastName, String userName) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.userName = userName;
     }
+    public User(String firstName, String lastName, String userName, List<Task> tasks) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.userName = userName;
+        this.tasks = tasks;
+    }
+    public User(long id, String firstName, String lastName, String userName, List<Task> tasks) {
+        this.id = id;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.userName = userName;
+        this.tasks = tasks;
+    }
 
     public long getId() {
         return id;
     }
-
     public void setId(long id) {
         this.id = id;
     }
@@ -51,7 +62,6 @@ public class User implements Serializable {
     public String getFirstName() {
         return firstName;
     }
-
     public void setFirstName(String firstName) {
         this.firstName = firstName;
     }
@@ -59,7 +69,6 @@ public class User implements Serializable {
     public String getLastName() {
         return lastName;
     }
-
     public void setLastName(String lastName) {
         this.lastName = lastName;
     }
@@ -67,7 +76,6 @@ public class User implements Serializable {
     public String getUserName() {
         return userName;
     }
-
     public void setUserName(String userName) {
         this.userName = userName;
     }
@@ -75,7 +83,6 @@ public class User implements Serializable {
     public List<Task> getTasks() {
         return tasks;
     }
-
     public void setTasks(List<Task> tasks) {
         this.tasks = tasks;
     }

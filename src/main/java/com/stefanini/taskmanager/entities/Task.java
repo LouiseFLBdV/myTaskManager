@@ -14,11 +14,9 @@ public class Task implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-
     @Column(name = "task_title")
 //    @EmailField(field = "taskTitle")
     private String taskTitle;
-
 
     @Column(name = "description")
 //    @EmailField(field = "description")
@@ -32,26 +30,27 @@ public class Task implements Serializable {
     )
     private List<User> users = new ArrayList<>();
 
-
+    public Task() {}
+    public Task(long id, String taskTitle, String description, List<User> users) {
+        this.id = id;
+        this.taskTitle = taskTitle;
+        this.description = description;
+        this.users = users;
+    }
     public Task(User user, String taskTitle, String description) {
         this.taskTitle = taskTitle;
         this.description = description;
         users.add(user);
     }
-
-    public Task(List<User> users, String taskTitle, String description) {
-        this.users = users;
+    public Task(String taskTitle, String description, List<User> users) {
         this.taskTitle = taskTitle;
         this.description = description;
-    }
-
-    public Task() {
+        this.users = users;
     }
 
     public long getId() {
         return id;
     }
-
     public void setId(long id) {
         this.id = id;
     }
@@ -59,7 +58,6 @@ public class Task implements Serializable {
     public String getTaskTitle() {
         return taskTitle;
     }
-
     public void setTaskTitle(String taskTitle) {
         this.taskTitle = taskTitle;
     }
@@ -67,7 +65,6 @@ public class Task implements Serializable {
     public String getDescription() {
         return description;
     }
-
     public void setDescription(String description) {
         this.description = description;
     }
@@ -75,7 +72,6 @@ public class Task implements Serializable {
     public List<User> getUsers() {
         return users;
     }
-
     public void setUsers(List<User> users) {
         this.users = users;
     }

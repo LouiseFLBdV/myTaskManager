@@ -1,5 +1,6 @@
 package com.stefanini.taskmanager.operations.commands;
-import com.stefanini.taskmanager.entities.Task;
+import com.stefanini.taskmanager.dto.TaskDTO;
+import com.stefanini.taskmanager.dto.UserDTO;
 import com.stefanini.taskmanager.model.InputModel;
 import com.stefanini.taskmanager.model.OutputModel;
 import com.stefanini.taskmanager.service.TaskService;
@@ -20,7 +21,7 @@ public class AddTaskCommand extends AbstractCommand {
     @Override
     public OutputModel execute() {
         OutputModel outputModel = new OutputModel();
-        Task task = taskService.create(new Task(userService.getByUserName(getInputModel().getUserName()), getInputModel().getTaskTittle(), getInputModel().getDesc()));
+        TaskDTO task = taskService.create(new TaskDTO(0,getInputModel().getTaskTittle(), getInputModel().getDesc(), userService.getByUserName(getInputModel().getUserName())));
         outputModel.setTask(task);
         return outputModel;
     }

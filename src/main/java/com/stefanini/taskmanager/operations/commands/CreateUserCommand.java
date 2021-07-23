@@ -1,5 +1,6 @@
 package com.stefanini.taskmanager.operations.commands;
 
+import com.stefanini.taskmanager.dto.UserDTO;
 import com.stefanini.taskmanager.entities.Task;
 import com.stefanini.taskmanager.entities.User;
 import com.stefanini.taskmanager.model.InputModel;
@@ -12,12 +13,13 @@ import org.springframework.stereotype.Component;
 public class CreateUserCommand extends AbstractCommand {
     @Autowired
     UserService userService;
+
     @Override
     public OutputModel execute() {
-        User user = null;
+        UserDTO user = null;
         OutputModel outputModel = new OutputModel();
         if(userService.getByUserName(getInputModel().getUserName())==null){
-            user = userService.create(new User(getInputModel().getFirstName(), getInputModel().getLastName(), getInputModel().getUserName()));
+            user = userService.create(new UserDTO( 0, getInputModel().getFirstName(), getInputModel().getLastName(), getInputModel().getUserName()));
         }
         outputModel.setUser(user);
         return outputModel;

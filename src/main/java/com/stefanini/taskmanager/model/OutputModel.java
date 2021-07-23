@@ -1,5 +1,7 @@
 package com.stefanini.taskmanager.model;
 
+import com.stefanini.taskmanager.dto.TaskDTO;
+import com.stefanini.taskmanager.dto.UserDTO;
 import com.stefanini.taskmanager.entities.Task;
 import com.stefanini.taskmanager.entities.User;
 
@@ -7,32 +9,32 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class OutputModel {
-    private Task task;
-    private User user;
+    private TaskDTO task;
+    private UserDTO user;
     private String commandName;
-    private List<User> users = new ArrayList<>();
+    private List<UserDTO> users = new ArrayList<>();
 
-    public Task getTask() {
+    public TaskDTO getTask() {
         return task;
     }
 
-    public void setTask(Task task) {
+    public void setTask(TaskDTO task) {
         this.task = task;
     }
 
-    public User getUser() {
+    public UserDTO getUser() {
         return user;
     }
 
-    public void setUser(User user) {
+    public void setUser(UserDTO user) {
         this.user = user;
     }
 
-    public List<User> getUsers() {
+    public List<UserDTO> getUsers() {
         return users;
     }
 
-    public void setUsers(List<User> users) {
+    public void setUsers(List<UserDTO> users) {
         this.users = users;
     }
 
