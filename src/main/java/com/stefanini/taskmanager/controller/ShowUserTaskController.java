@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class ShowUserTaskController {
 
     @Autowired
-    CommandService commandService;
+    private CommandService commandService;
 
     @RequestMapping("/showUserTask")
     public String createUser(@ModelAttribute("inputModel") InputModel inputModel, Model model){

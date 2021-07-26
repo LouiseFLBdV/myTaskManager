@@ -1,12 +1,8 @@
 package com.stefanini.taskmanager.dao;
 
-import com.stefanini.taskmanager.entities.User;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-
-import com.stefanini.taskmanager.dao.Dao;
-import org.springframework.stereotype.Repository;
 
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;

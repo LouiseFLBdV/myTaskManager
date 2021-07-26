@@ -3,9 +3,7 @@ package com.stefanini.taskmanager.service.impl;
 import com.stefanini.taskmanager.dao.TaskDao;
 import com.stefanini.taskmanager.dao.UserDao;
 import com.stefanini.taskmanager.dto.TaskDTO;
-import com.stefanini.taskmanager.dto.UserDTO;
 import com.stefanini.taskmanager.entities.Task;
-import com.stefanini.taskmanager.entities.User;
 import com.stefanini.taskmanager.service.TaskService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,7 +12,6 @@ import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 @Service
 public class TaskServiceImpl implements TaskService {
@@ -22,7 +19,7 @@ public class TaskServiceImpl implements TaskService {
     private TaskDao taskDao;
     private UserDao userDao;
 
-    TaskServiceImpl(){ }
+    public TaskServiceImpl(){ }
 
     @Autowired
     public void setUserDao(UserDao userDao) {

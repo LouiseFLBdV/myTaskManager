@@ -1,8 +1,5 @@
 package com.stefanini.taskmanager.model;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class InputModel {
     private String commandName;
     private String userName;
@@ -10,6 +7,18 @@ public class InputModel {
     private String firstName;
     private String taskTittle;
     private String desc;
+
+    public InputModel() {
+    }
+
+    public InputModel(String commandName, String userName, String lastName, String firstName, String taskTittle, String desc) {
+        this.commandName = commandName;
+        this.userName = userName;
+        this.lastName = lastName;
+        this.firstName = firstName;
+        this.taskTittle = taskTittle;
+        this.desc = desc;
+    }
 
     public String getCommandName() {
         return commandName;

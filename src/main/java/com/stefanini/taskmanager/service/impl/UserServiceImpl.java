@@ -2,7 +2,6 @@ package com.stefanini.taskmanager.service.impl;
 
 import com.stefanini.taskmanager.dao.TaskDao;
 import com.stefanini.taskmanager.dao.UserDao;
-import com.stefanini.taskmanager.dto.TaskDTO;
 import com.stefanini.taskmanager.dto.UserDTO;
 import com.stefanini.taskmanager.entities.User;
 import com.stefanini.taskmanager.service.UserService;

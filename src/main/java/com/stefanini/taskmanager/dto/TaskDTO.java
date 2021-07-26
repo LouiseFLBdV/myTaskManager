@@ -1,7 +1,6 @@
 package com.stefanini.taskmanager.dto;
 
 import com.stefanini.taskmanager.entities.Task;
-import com.stefanini.taskmanager.entities.User;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,6 +26,12 @@ public class TaskDTO {
         this.taskTitle = taskTitle;
         this.description = description;
         users.add(user);
+    }
+
+    public TaskDTO(long taskId, String taskTitle, String description) {
+        this.taskId = taskId;
+        this.taskTitle = taskTitle;
+        this.description = description;
     }
 
     public long getTaskId() {

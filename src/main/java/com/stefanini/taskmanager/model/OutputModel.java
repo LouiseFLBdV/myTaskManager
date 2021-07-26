@@ -2,8 +2,6 @@ package com.stefanini.taskmanager.model;
 
 import com.stefanini.taskmanager.dto.TaskDTO;
 import com.stefanini.taskmanager.dto.UserDTO;
-import com.stefanini.taskmanager.entities.Task;
-import com.stefanini.taskmanager.entities.User;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,6 +11,16 @@ public class OutputModel {
     private UserDTO user;
     private String commandName;
     private List<UserDTO> users = new ArrayList<>();
+
+    public OutputModel() {
+    }
+
+    public OutputModel(TaskDTO task, UserDTO user, String commandName, List<UserDTO> users) {
+        this.task = task;
+        this.user = user;
+        this.commandName = commandName;
+        this.users = users;
+    }
 
     public TaskDTO getTask() {
         return task;

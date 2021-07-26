@@ -1,8 +1,6 @@
 package com.stefanini.taskmanager.operations.commands;
 
-import com.stefanini.taskmanager.entities.Task;
 import com.stefanini.taskmanager.model.InputModel;
-
 import com.stefanini.taskmanager.model.OutputModel;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;

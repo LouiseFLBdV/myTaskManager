@@ -13,7 +13,7 @@ import java.util.List;
 @Component
 public class ShowUsersCommand extends AbstractCommand {
 
-    UserService userService;
+    private UserService userService;
 
     public ShowUsersCommand(){}
 
@@ -21,6 +21,7 @@ public class ShowUsersCommand extends AbstractCommand {
     public void setUserService(UserService userService){
         this.userService = userService;
     }
+
     @Override
     public OutputModel execute() {
         OutputModel outputModel = new OutputModel();

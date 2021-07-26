@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class ShowUsersController {
 
     @Autowired
-    CommandService commandService;
+    private CommandService commandService;
 
     @RequestMapping("/showUsers")
     public String createUser(@ModelAttribute("inputModel") InputModel inputModel, Model model){

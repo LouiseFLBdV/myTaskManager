@@ -1,10 +1,7 @@
 package com.stefanini.taskmanager.operations.commands;
 
-
 import com.stefanini.taskmanager.dto.TaskDTO;
 import com.stefanini.taskmanager.dto.UserDTO;
-import com.stefanini.taskmanager.entities.Task;
-import com.stefanini.taskmanager.entities.User;
 import com.stefanini.taskmanager.model.InputModel;
 import com.stefanini.taskmanager.model.OutputModel;
 import com.stefanini.taskmanager.service.TaskService;

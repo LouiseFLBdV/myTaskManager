@@ -31,6 +31,10 @@ public class UserDTO {
         this.userName = userName;
     }
 
+    public UserDTO(List<TaskDTO> tasks) {
+        this.tasks = tasks;
+    }
+
     public long getUserId() {
         return userId;
     }

@@ -2,7 +2,6 @@ package com.stefanini.taskmanager.controller;
 
 import com.stefanini.taskmanager.model.InputModel;
 import com.stefanini.taskmanager.model.OutputModel;
-import com.stefanini.taskmanager.operations.commands.CreateUserCommand;
 import com.stefanini.taskmanager.service.CommandService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -14,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class CreateUserController {
 
     @Autowired
-    CommandService commandService;
+    private CommandService commandService;
 
     @RequestMapping("/createUser")
     public String createUser(@ModelAttribute("inputModel") InputModel inputModel, Model model){
