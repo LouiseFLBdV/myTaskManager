@@ -1,8 +1,8 @@
 package com.stefanini.taskmanager.controller;
 
+import com.stefanini.taskmanager.dto.UserDTO;
 import com.stefanini.taskmanager.model.InputModel;
-import com.stefanini.taskmanager.model.OutputModel;
-import com.stefanini.taskmanager.service.CommandService;
+import com.stefanini.taskmanager.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,16 +13,17 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class CreateUserController {
 
     @Autowired
-    private CommandService commandService;
+    private UserService userService;
 
     @RequestMapping("/createUser")
     public String createUser(@ModelAttribute("inputModel") InputModel inputModel, Model model){
-        OutputModel outputModel = new OutputModel();
-        outputModel.setCommandName(inputModel.getCommandName());
-        outputModel = commandService.execute(commandService.getCreateUserCommand(), inputModel);
 
+        UserDTO user = null;
+        if(userService.getByUserName(inputModel.getUserName())==null){
+            user = userService.create(new UserDTO( 0, inputModel.getFirstName(), inputModel.getLastName(), inputModel.getUserName()));
+        }
 
-        model.addAttribute("outputModel", outputModel);
+        model.addAttribute("UserDTO", user);
         return "createUser";
     }
 }

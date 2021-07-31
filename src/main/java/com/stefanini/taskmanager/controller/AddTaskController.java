@@ -1,8 +1,9 @@
 package com.stefanini.taskmanager.controller;
 
+import com.stefanini.taskmanager.dto.TaskDTO;
 import com.stefanini.taskmanager.model.InputModel;
-import com.stefanini.taskmanager.model.OutputModel;
-import com.stefanini.taskmanager.service.CommandService;
+import com.stefanini.taskmanager.service.TaskService;
+import com.stefanini.taskmanager.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,15 +14,16 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class AddTaskController {
 
     @Autowired
-    private CommandService commandService;
+    private UserService userService;
+    @Autowired
+    private TaskService taskService;
 
     @RequestMapping("/addTask")
     public String createUser(@ModelAttribute("inputModel") InputModel inputModel, Model model){
-        OutputModel outputModel = new OutputModel();
-        outputModel.setCommandName(inputModel.getCommandName());
-        outputModel = commandService.execute(commandService.getAddTaskCommand(), inputModel);
 
-        model.addAttribute("outputModel", outputModel);
+        TaskDTO task = taskService.create(new TaskDTO(0,inputModel.getTaskTittle(), inputModel.getDesc(), userService.getByUserName(inputModel.getUserName())));
+
+        model.addAttribute("TaskDTO", task);
         return "addTask";
     }
 }

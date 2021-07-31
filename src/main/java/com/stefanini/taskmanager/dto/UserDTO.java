@@ -70,6 +70,7 @@ public class UserDTO {
         this.tasks = tasks;
     }
 
+    //todo aparte
     public static UserDTO convertToDTO(User user){
         if (user==null){
             return null;

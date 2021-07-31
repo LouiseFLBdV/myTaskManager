@@ -11,7 +11,7 @@
     <th>firstNmae</th>
     <th>lastNmae</th>
   </tr>
-  <c:forEach var="user" items="${outputModel.users}">
+  <c:forEach var="user" items="${UserDTOList}">
     <tr><br>
       <td>${user.userName}</td>
       <td>${user.firstName}</td>

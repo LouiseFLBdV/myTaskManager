@@ -5,6 +5,6 @@
 </head>
 <body>
     <h2>Create User</h2>
-    <h4>${outputModel.user} created</h4>
+    <h4>${UserDTO.userName} created</h4>
 </body>
 </html>

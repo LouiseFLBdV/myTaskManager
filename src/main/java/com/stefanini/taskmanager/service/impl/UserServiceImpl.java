@@ -73,6 +73,8 @@ public class UserServiceImpl implements UserService{
         return UserDTO.convertToDTO(userDao.getByUserName(userName));
     }
 
+    //todo conv to entity
+    //todo aparte
     public User convertToDAO(UserDTO user){
         User userEntity;
         if (user.getUserId()==0){

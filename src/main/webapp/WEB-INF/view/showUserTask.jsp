@@ -6,12 +6,12 @@
 <body>
 <main>
     <h2>Show user task</h2>
-    <h4>User ${outputModel.user.userName}</h4>
+    <h4>User ${UserDTO.userName}</h4>
     <tr>
         <th>taskTittle</th>
         <th>taskDesc</th>
     </tr>
-    <c:forEach var="task" items="${outputModel.user.tasks}">
+    <c:forEach var="task" items="${UserDTO.tasks}">
         <tr><br>
             <td>${task.taskTitle}</td>
             <td>${task.description}</td>
