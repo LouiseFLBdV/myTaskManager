@@ -65,23 +65,4 @@ public class TaskDTO {
     public void setUsers(List<UserDTO> users) {
         this.users = users;
     }
-
-    public static TaskDTO convertToDTO(Task task){
-        if (task==null){
-            return null;
-        }else{
-            long taskId = task.getId();
-            String taskTitle = task.getTaskTitle();
-            String description = task.getDescription();
-            List<UserDTO> users = task.getUsers().stream().map(user -> {
-                UserDTO userDTO = new UserDTO();
-                userDTO.setUserId(user.getId());
-                userDTO.setUserName(user.getUserName());
-                userDTO.setFirstName(user.getFirstName());
-                userDTO.setLastName(user.getLastName());
-                return userDTO;
-            }).collect(Collectors.toList());
-            return new TaskDTO(taskId, taskTitle, description, users);
-        }
-    }
 }

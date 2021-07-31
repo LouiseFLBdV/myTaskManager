@@ -1,6 +1,5 @@
 package com.stefanini.taskmanager.dto;
 
-import com.stefanini.taskmanager.entities.Task;
 import com.stefanini.taskmanager.entities.User;
 
 import java.util.ArrayList;
@@ -68,25 +67,5 @@ public class UserDTO {
     }
     public void setTasks(List<TaskDTO> tasks) {
         this.tasks = tasks;
-    }
-
-    //todo aparte
-    public static UserDTO convertToDTO(User user){
-        if (user==null){
-            return null;
-        }else {
-            long userId = user.getId();
-            String firstName = user.getFirstName();
-            String lastName = user.getLastName();
-            String userName = user.getUserName();
-            List<TaskDTO> tasks = user.getTasks().stream().map(task -> {
-                TaskDTO taskDTO = new TaskDTO();
-                taskDTO.setTaskId(task.getId());
-                taskDTO.setTaskTitle(task.getTaskTitle());
-                taskDTO.setDescription(task.getDescription());
-                return taskDTO;
-            }).collect(Collectors.toList());
-            return new UserDTO(userId, firstName, lastName, userName, tasks);
-        }
     }
 }
