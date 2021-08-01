@@ -9,8 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class MainController {
 
     @RequestMapping("/")
-    public String welcome(Model model){
-        model.addAttribute("inputModel", new InputModel());
+    public String welcome() {
         return "welcome";
     }
 

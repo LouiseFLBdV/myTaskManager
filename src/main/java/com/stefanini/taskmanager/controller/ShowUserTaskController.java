@@ -18,32 +18,36 @@ public class ShowUserTaskController {
 
     @Autowired
     private UserService userService;
-    @Autowired
-    private TaskService taskService;
+
     private static final Logger logger = LogManager.getLogger();
 
     @RequestMapping("/showUserTask")
-    public String createUser(@ModelAttribute("inputModel") InputModel inputModel, Model model){
+    public String createUser(@ModelAttribute("inputModel") InputModel inputModel, Model model) {
 
         UserDTO user = userService.getByUserName(inputModel.getUserName());
-        if (user!=null){
+        if (user != null) {
             showUser(userService.getByUserName(inputModel.getUserName()));
-        }else {
+        } else {
             logger.info("User " + inputModel.getUserName() + " not found");
         }
         model.addAttribute("UserDTO", user);
         return "showUserTask";
     }
 
-    //todo
-    public void showUser(UserDTO user){
+    @RequestMapping("/showUserTaskInput")
+    public String createUserInput(@ModelAttribute("inputModel") InputModel inputModel, Model model) {
+        model.addAttribute("inputModel", new InputModel());
+        return "showUserTaskInput";
+    }
+
+    public void showUser(UserDTO user) {
         logger.info("User: " + user.getUserName());
-        if (!user.getTasks().isEmpty()){
+        if (!user.getTasks().isEmpty()) {
             user.getTasks().forEach(this::showTasks);
         }
     }
 
-    public void showTasks(TaskDTO task){
+    public void showTasks(TaskDTO task) {
         logger.info("\ttask " + task.getTaskTitle() + ":");
         logger.info("\t\t" + task.getDescription());
     }

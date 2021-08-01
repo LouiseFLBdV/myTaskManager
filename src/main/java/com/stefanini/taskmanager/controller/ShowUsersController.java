@@ -22,23 +22,22 @@ public class ShowUsersController {
     private static final Logger logger = LogManager.getLogger();
 
     @RequestMapping("/showUsers")
-    public String createUser(@ModelAttribute("inputModel") InputModel inputModel, Model model){
+    public String createUser(Model model) {
 
         List<UserDTO> users = userService.getAll();
-        System.out.println(users);
         users.forEach(this::showUsers);
         model.addAttribute("UserDTOList", users);
         return "showUsers";
     }
 
-    public void showUsers(UserDTO user){
+    public void showUsers(UserDTO user) {
         logger.info("User: " + user.getUserName());
-        if (!user.getTasks().isEmpty()){
+        if (!user.getTasks().isEmpty()) {
             user.getTasks().forEach(this::showTasks);
         }
     }
 
-    public void showTasks(TaskDTO task){
+    public void showTasks(TaskDTO task) {
         logger.info("\ttask " + task.getTaskTitle() + ":");
         logger.info("\t\t" + task.getDescription());
     }

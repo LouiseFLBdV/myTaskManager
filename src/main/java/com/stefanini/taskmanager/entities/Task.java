@@ -9,7 +9,7 @@ import java.util.List;
 @Entity
 @Table(name="tasktable")
 //@Email(message = "Task {task title} {task description} has been assigned to {username}")
-public class Task implements Serializable {
+public class Task {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;

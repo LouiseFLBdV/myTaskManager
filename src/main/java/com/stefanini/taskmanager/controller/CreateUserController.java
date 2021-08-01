@@ -16,14 +16,20 @@ public class CreateUserController {
     private UserService userService;
 
     @RequestMapping("/createUser")
-    public String createUser(@ModelAttribute("inputModel") InputModel inputModel, Model model){
+    public String createUser(@ModelAttribute("inputModel") InputModel inputModel, Model model) {
 
         UserDTO user = null;
-        if(userService.getByUserName(inputModel.getUserName())==null){
-            user = userService.create(new UserDTO( 0, inputModel.getFirstName(), inputModel.getLastName(), inputModel.getUserName()));
+        if (userService.getByUserName(inputModel.getUserName()) == null) {
+            user = userService.create(new UserDTO(0, inputModel.getFirstName(), inputModel.getLastName(), inputModel.getUserName()));
         }
 
         model.addAttribute("UserDTO", user);
         return "createUser";
+    }
+
+    @RequestMapping("/createUserInput")
+    public String createUserInput(@ModelAttribute("inputModel") InputModel inputModel, Model model) {
+        model.addAttribute("inputModel", new InputModel());
+        return "createUserInput";
     }
 }

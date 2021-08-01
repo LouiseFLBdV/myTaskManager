@@ -1,10 +1,7 @@
 package com.stefanini.taskmanager.dto;
 
-import com.stefanini.taskmanager.entities.User;
-
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class UserDTO {
 
