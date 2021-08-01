@@ -15,19 +15,20 @@
     </div>
 </header>
 <main>
-    <h2>showUsers</h2>
-    <tr>
-        <th>userName</th>
-        <th>firstNmae</th>
-        <th>lastNmae</th>
-    </tr>
-    <c:forEach var="user" items="${UserDTOList}">
+    <table>
         <tr>
-            <td>${user.userName}</td>
-            <td>${user.firstName}</td>
-            <td>${user.lastName}</td>
+            <th>userName</th>
+            <th>firstNmae</th>
+            <th>lastNmae</th>
         </tr>
-    </c:forEach>
+        <c:forEach var="user" items="${UserDTOList}">
+            <tr>
+                <td>${user.userName}</td>
+                <td>${user.firstName}</td>
+                <td>${user.lastName}</td>
+            </tr>
+        </c:forEach>
+    </table>
 </main>
 </body>
 </html>

@@ -14,7 +14,6 @@
     </div>
 </header>
 <main>
-    <h2>Create User</h2>
     <h4>${UserDTO.userName} created</h4>
 </main>
 </body>
