@@ -22,7 +22,7 @@ public class ShowUserTaskController {
     private static final Logger logger = LogManager.getLogger();
 
     @RequestMapping("/showUserTask")
-    public String createUser(@ModelAttribute("inputModel") InputModel inputModel, Model model) {
+    public String showUserTask(@ModelAttribute("inputModel") InputModel inputModel, Model model) {
 
         UserDTO user = userService.getByUserName(inputModel.getUserName());
         if (user != null) {

@@ -19,7 +19,7 @@ public class AddTaskController {
     private TaskService taskService;
 
     @RequestMapping("/addTask")
-    public String createUser(@ModelAttribute("inputModel") InputModel inputModel, Model model) {
+    public String addTask(@ModelAttribute("inputModel") InputModel inputModel, Model model) {
 
         TaskDTO task = taskService.create(new TaskDTO(0, inputModel.getTaskTittle(), inputModel.getDesc(), userService.getByUserName(inputModel.getUserName())));
 
@@ -28,7 +28,7 @@ public class AddTaskController {
     }
 
     @RequestMapping("/addTaskInput")
-    public String createUserInput(@ModelAttribute("inputModel") InputModel inputModel, Model model) {
+    public String addTaskInput(@ModelAttribute("inputModel") InputModel inputModel, Model model) {
         model.addAttribute("inputModel", new InputModel());
         return "addTaskInput";
     }

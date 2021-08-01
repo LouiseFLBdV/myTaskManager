@@ -22,7 +22,7 @@ public class ShowUsersController {
     private static final Logger logger = LogManager.getLogger();
 
     @RequestMapping("/showUsers")
-    public String createUser(Model model) {
+    public String showAllUsers(Model model) {
 
         List<UserDTO> users = userService.getAll();
         users.forEach(this::showUsers);
