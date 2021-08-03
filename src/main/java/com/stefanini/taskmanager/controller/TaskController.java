@@ -1,6 +1,8 @@
 package com.stefanini.taskmanager.controller;
 
 import com.stefanini.taskmanager.dto.TaskDTO;
+import com.stefanini.taskmanager.dto.UserDTO;
+import com.stefanini.taskmanager.entities.User;
 import com.stefanini.taskmanager.exception_handling.ControllerException;
 import com.stefanini.taskmanager.service.TaskService;
 import com.stefanini.taskmanager.service.UserService;
@@ -38,11 +40,15 @@ public class TaskController {
 
     @PostMapping("/tasks")
     public TaskDTO createTask(@RequestBody TaskDTO inputTask){
-        TaskDTO task;
+        TaskDTO task = null;
         if (inputTask.getUsers().size() > 1){
-            task = taskService.create(inputTask);
+            task = taskService.save(inputTask);
         } else {
-            task = taskService.create(new TaskDTO(inputTask.getTitle(), inputTask.getDescription(), userService.getByUserName(inputTask.getUsers().get(0).getUserName())));
+            if (inputTask.getUsers().isEmpty()){
+                taskService.save(new TaskDTO(inputTask.getTitle(), inputTask.getDescription()));
+            }else{
+                task = taskService.save(new TaskDTO(inputTask.getTitle(), inputTask.getDescription(), userService.getByUserName(inputTask.getUsers().get(0).getUserName())));
+            }
         }
         return task;
     }
@@ -52,7 +58,7 @@ public class TaskController {
         if (taskService.getById(inputTask.getTaskId())==null){
             throw new ControllerException("Can't update task with id  = " + inputTask.getTaskId() + " id, task not found in Database");
         }
-        taskService.update(inputTask);
+        taskService.save(inputTask);
     }
 
     @DeleteMapping("/tasks/{id}")
@@ -60,7 +66,6 @@ public class TaskController {
         if (taskService.getById(id)==null){
             throw new ControllerException("Can't delete task with id = " + id +" id, task not found in Database");
         }
-        System.out.println(taskService.getById(id));
-        taskService.remove(taskService.getById(id));
+        taskService.delete(taskService.getById(id));
     }
 }

@@ -55,7 +55,7 @@ public class UserController {
     public UserDTO createUser(@RequestBody UserDTO inputUser){
         UserDTO user = null;
         if (userService.getByUserName(inputUser.getUserName()) == null) {
-            user = userService.create(inputUser);
+            user = userService.save(inputUser);
         }else {
             throw new ControllerException("User with username = " + inputUser.getUserName() + " already exist");
         }
@@ -70,7 +70,7 @@ public class UserController {
         if (userService.getByUserName(inputUser.getUserName())!=null && userService.getByUserName(inputUser.getUserName()).getUserId()!=inputUser.getUserId()){
             throw new ControllerException("Can't update user with id = " + inputUser.getUserId() + " id, user with this userName already exist");
         }
-        userService.update(inputUser);
+        userService.save(inputUser);
     }
 
     @DeleteMapping("/users/{id}")
@@ -78,6 +78,6 @@ public class UserController {
         if (userService.getById(id)==null){
             throw new ControllerException("Can't delete user with id = " + id +" id, user not found in Database");
         }
-        userService.remove(userService.getById(id));
+        userService.delete(userService.getById(id));
     }
 }

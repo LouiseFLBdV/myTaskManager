@@ -23,6 +23,10 @@ public class TaskDTO {
         this.description = description;
         users.add(user);
     }
+    public TaskDTO(String title, String description) {
+        this.title = title;
+        this.description = description;
+    }
 
     public long getTaskId() {
         return taskId;

@@ -70,4 +70,15 @@ public class UserDTO {
     public void setTasks(List<com.stefanini.taskmanager.dto.TaskDTO> tasks) {
         this.tasks = tasks;
     }
+
+    @Override
+    public String toString() {
+        return "UserDTO{" +
+                "userId=" + userId +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", userName='" + userName + '\'' +
+                ", tasks=" + tasks +
+                '}';
+    }
 }

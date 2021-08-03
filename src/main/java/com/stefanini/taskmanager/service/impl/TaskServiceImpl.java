@@ -1,9 +1,10 @@
 package com.stefanini.taskmanager.service.impl;
 
 import com.stefanini.taskmanager.dao.TaskDao;
+import com.stefanini.taskmanager.dao.TaskRepository;
 import com.stefanini.taskmanager.dto.TaskDTO;
 import com.stefanini.taskmanager.entities.Task;
-import com.stefanini.taskmanager.util.ConverterEntityDTO;
+import com.stefanini.taskmanager.util.ConverterUtil;
 import com.stefanini.taskmanager.service.TaskService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,43 +17,34 @@ import java.util.List;
 public class TaskServiceImpl implements TaskService {
 
     @Autowired
-    private TaskDao taskDao;
+    private TaskRepository taskRepository;
     @Autowired
-    private ConverterEntityDTO converterEntityDTO;
+    private ConverterUtil converterUtil;
 
     public TaskServiceImpl(){ }
 
     @Override
     public TaskDTO getById(long id) {
-        return converterEntityDTO.convertToTaskDTO(taskDao.getById(id));
+        return converterUtil.convertToTaskDTO(taskRepository.getById(id));
     }
 
     @Override
-    @Transactional
     public List<TaskDTO> getAll() {
-        List<Task> users = taskDao.getAll();
+        List<Task> tasks = taskRepository.findAll();
         List<TaskDTO> tasksDTO = new ArrayList<>();
-        users.forEach(task -> {
-            tasksDTO.add(converterEntityDTO.convertToTaskDTO(task));
+        tasks.forEach(task -> {
+            tasksDTO.add(converterUtil.convertToTaskDTO(task));
         });
         return tasksDTO;
     }
 
     @Override
-    @Transactional
-    public TaskDTO create(TaskDTO task) {
-        return converterEntityDTO.convertToTaskDTO(taskDao.create(converterEntityDTO.convertToTaskEntity(task)));
+    public TaskDTO save(TaskDTO task) {
+        return converterUtil.convertToTaskDTO(taskRepository.save(converterUtil.convertToTaskEntity(task)));
     }
 
     @Override
-    @Transactional
-    public void update(TaskDTO task) {
-        taskDao.update(converterEntityDTO.convertToTaskEntity(task));
-    }
-
-    @Override
-    @Transactional
-    public void remove(TaskDTO task) {
-        taskDao.delete(converterEntityDTO.convertToTaskEntity(task));
+    public void delete(TaskDTO task) {
+        taskRepository.delete(converterUtil.convertToTaskEntity(task));
     }
 }

@@ -1,7 +1,9 @@
 package com.stefanini.taskmanager.util;
 
 import com.stefanini.taskmanager.dao.TaskDao;
+import com.stefanini.taskmanager.dao.TaskRepository;
 import com.stefanini.taskmanager.dao.UserDao;
+import com.stefanini.taskmanager.dao.UserRepository;
 import com.stefanini.taskmanager.dto.TaskDTO;
 import com.stefanini.taskmanager.dto.UserDTO;
 import com.stefanini.taskmanager.entities.Task;
@@ -13,12 +15,13 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
-public class ConverterEntityDTO {
+public class ConverterUtil {
 
     @Autowired
-    private UserDao userDao;
+    private UserRepository userRepository;
+
     @Autowired
-    private TaskDao taskDao;
+    private TaskRepository taskRepository;
 
     public TaskDTO convertToTaskDTO(Task task){
         if (task==null){
@@ -62,11 +65,14 @@ public class ConverterEntityDTO {
         if (task.getTaskId()==0){
             taskEntity = new Task();
         }else{
-            taskEntity = taskDao.getById(task.getTaskId());
+            taskEntity = taskRepository.getById(task.getTaskId());
         }
         taskEntity.setTaskTitle(task.getTitle());
         taskEntity.setDescription(task.getDescription());
-        taskEntity.setUsers(task.getUsers().stream().map(user -> userDao.getById(user.getUserId())).collect(Collectors.toList()));
+        System.out.println(task);
+        System.out.println(task.getUsers());
+        //todo проблема в том что я делаю гет бай айди, а айди нету
+        taskEntity.setUsers(task.getUsers().stream().map(user -> userRepository.(user.getUserId())).collect(Collectors.toList()));
         return taskEntity;
     }
 
@@ -75,12 +81,12 @@ public class ConverterEntityDTO {
         if (user.getUserId()==0){
             userEntity = new User();
         }else{
-            userEntity = userDao.getById(user.getUserId());
+            userEntity = userRepository.getById(user.getUserId());
         }
         userEntity.setUserName(user.getUserName());
         userEntity.setFirstName(user.getFirstName());
         userEntity.setLastName(user.getLastName());
-        userEntity.setTasks(user.getTasks().stream().map(task-> taskDao.getById(task.getTaskId())).collect(Collectors.toList()));
+        userEntity.setTasks(user.getTasks().stream().map(task-> taskRepository.getById(task.getTaskId())).collect(Collectors.toList()));
         return userEntity;
     }
 }
