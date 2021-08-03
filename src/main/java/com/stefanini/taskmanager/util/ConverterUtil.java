@@ -1,8 +1,6 @@
 package com.stefanini.taskmanager.util;
 
-import com.stefanini.taskmanager.dao.TaskDao;
 import com.stefanini.taskmanager.dao.TaskRepository;
-import com.stefanini.taskmanager.dao.UserDao;
 import com.stefanini.taskmanager.dao.UserRepository;
 import com.stefanini.taskmanager.dto.TaskDTO;
 import com.stefanini.taskmanager.dto.UserDTO;
@@ -12,6 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Objects;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -69,10 +69,15 @@ public class ConverterUtil {
         }
         taskEntity.setTaskTitle(task.getTitle());
         taskEntity.setDescription(task.getDescription());
-        System.out.println(task);
+        System.out.println(taskEntity);
         System.out.println(task.getUsers());
-        //todo проблема в том что я делаю гет бай айди, а айди нету
-        taskEntity.setUsers(task.getUsers().stream().map(user -> userRepository.(user.getUserId())).collect(Collectors.toList()));
+        taskEntity.setUsers(task.getUsers().stream().map(user -> {
+            if (user.getUserId()==0) {
+                Optional<User> optionalUser = userRepository.findAll().stream().filter(u -> u.getUserName().equals(user.getUserName())).findFirst();
+                return optionalUser.orElse(null);
+            }
+            return userRepository.getById(user.getUserId());
+        }).filter(Objects::nonNull).collect(Collectors.toList()));
         return taskEntity;
     }
 

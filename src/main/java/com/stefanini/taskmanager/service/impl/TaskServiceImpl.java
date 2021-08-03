@@ -1,6 +1,5 @@
 package com.stefanini.taskmanager.service.impl;
 
-import com.stefanini.taskmanager.dao.TaskDao;
 import com.stefanini.taskmanager.dao.TaskRepository;
 import com.stefanini.taskmanager.dto.TaskDTO;
 import com.stefanini.taskmanager.entities.Task;
@@ -8,8 +7,6 @@ import com.stefanini.taskmanager.util.ConverterUtil;
 import com.stefanini.taskmanager.service.TaskService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
 
