@@ -33,9 +33,9 @@ public class UserController {
         return user;
     }
 
-    @GetMapping("/users/byUserName/{userName}")
+    @GetMapping("/users/userName/{userName}")
     public UserDTO getByUsername(@PathVariable String userName){
-        UserDTO user = userService.getByUserName(userName);
+        UserDTO user = userService.findByUserName(userName);
         if (user == null){
             throw new ControllerException("There is no user with username = " + userName + " in Database");
         }
@@ -44,17 +44,17 @@ public class UserController {
 
     @GetMapping("/users/{userName}/tasks")
     public List<TaskDTO> getTasks(@PathVariable String userName){
-        if (userService.getByUserName(userName) == null){
+        if (userService.findByUserName(userName) == null){
             throw new ControllerException("There is no user with username = " + userName + " in Database");
         }
-        UserDTO user = userService.getByUserName(userName);
+        UserDTO user = userService.findByUserName(userName);
         return user.getTasks();
     }
 
     @PostMapping("/users")
     public UserDTO createUser(@RequestBody UserDTO inputUser){
         UserDTO user = null;
-        if (userService.getByUserName(inputUser.getUserName()) == null) {
+        if (userService.findByUserName(inputUser.getUserName()) == null) {
             user = userService.save(inputUser);
         }else {
             throw new ControllerException("User with username = " + inputUser.getUserName() + " already exist");
@@ -67,7 +67,7 @@ public class UserController {
         if (userService.getById(inputUser.getUserId())==null){
             throw new ControllerException("Can't update user with id = " + inputUser.getUserId() + " id, user not found in Database");
         }
-        if (userService.getByUserName(inputUser.getUserName())!=null && userService.getByUserName(inputUser.getUserName()).getUserId()!=inputUser.getUserId()){
+        if (userService.findByUserName(inputUser.getUserName())!=null && userService.findByUserName(inputUser.getUserName()).getUserId()!=inputUser.getUserId()){
             throw new ControllerException("Can't update user with id = " + inputUser.getUserId() + " id, user with this userName already exist");
         }
         userService.save(inputUser);

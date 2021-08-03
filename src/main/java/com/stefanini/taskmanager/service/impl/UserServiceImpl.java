@@ -46,13 +46,7 @@ public class UserServiceImpl implements UserService{
     }
 
     @Override
-    public UserDTO getByUserName(String userName) {
-        UserDTO user = null;
-        List<User> users = userRepository.findAll();
-        Optional<User> optionalUser = users.stream().filter(u -> u.getUserName().equals(userName)).findFirst();
-        if (optionalUser.isPresent()){
-            user = converterUtil.convertToUserDTO(optionalUser.get());
-        }
-        return user;
+    public UserDTO findByUserName(String userName) {
+        return converterUtil.convertToUserDTO(userRepository.findByUserName(userName));
     }
 }

@@ -1,8 +1,6 @@
 package com.stefanini.taskmanager.controller;
 
 import com.stefanini.taskmanager.dto.TaskDTO;
-import com.stefanini.taskmanager.dto.UserDTO;
-import com.stefanini.taskmanager.entities.User;
 import com.stefanini.taskmanager.exception_handling.ControllerException;
 import com.stefanini.taskmanager.service.TaskService;
 import com.stefanini.taskmanager.service.UserService;
@@ -47,7 +45,7 @@ public class TaskController {
             if (inputTask.getUsers().isEmpty()){
                 taskService.save(new TaskDTO(inputTask.getTitle(), inputTask.getDescription()));
             }else{
-                task = taskService.save(new TaskDTO(inputTask.getTitle(), inputTask.getDescription(), userService.getByUserName(inputTask.getUsers().get(0).getUserName())));
+                task = taskService.save(new TaskDTO(inputTask.getTitle(), inputTask.getDescription(), userService.findByUserName(inputTask.getUsers().get(0).getUserName())));
             }
         }
         return task;
